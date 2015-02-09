@@ -8,8 +8,15 @@ public class Player {
     private String name;
     private Random random;
 
-    public Player(String name, int i, Random random) {
+    public int getAttackedVitiality() {
+        return attackedVitiality;
+    }
+
+    private int attackedVitiality;
+
+    public Player(String name, int vitality, Random random) {
         this.name = name;
+        this.vitality = vitality;
         this.random = random;
     }
 
@@ -22,7 +29,8 @@ public class Player {
     }
 
     public void reduceVitality(int attackedVitiality) {
-        vitality -= attackedVitiality;
+        this.attackedVitiality = attackedVitiality;
+        vitality -= this.attackedVitiality;
     }
 
     public int getVitality() {

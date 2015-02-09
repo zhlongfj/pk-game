@@ -5,28 +5,35 @@ import java.io.PrintStream;
  */
 public class GameProcess {
     private PrintStream out;
-    private Player playerFirstAttack;
-    private Player playerSecondAttack;
+    private Player firstAttackPlayer;
+    private Player secondAttackPlayer;
 
-    public GameProcess(PrintStream out, Player playerFirstAttack, Player playerSecondAttack) {
+    public GameProcess(PrintStream out, Player firstAttackPlayer, Player secondAttackPlayer) {
         this.out = out;
-        this.playerFirstAttack = playerFirstAttack;
-        this.playerSecondAttack = playerSecondAttack;
+        this.firstAttackPlayer = firstAttackPlayer;
+        this.secondAttackPlayer = secondAttackPlayer;
     }
 
     public void play() {
-        while (playerFirstAttack.getVitality() > 0 && playerSecondAttack.getVitality() > 0) {
-            playerFirstAttack.attack(playerSecondAttack);
-            playerSecondAttack.attack(playerFirstAttack);
+        while (firstAttackPlayer.getVitality() > 0 && secondAttackPlayer.getVitality() > 0) {
+            firstAttackPlayer.attack(secondAttackPlayer);
+            printAttack(firstAttackPlayer, secondAttackPlayer);
+            secondAttackPlayer.attack(firstAttackPlayer);
+            printAttack(secondAttackPlayer, firstAttackPlayer);
         }
 
-        if (playerFirstAttack.getVitality() <= 0) {
-            out.println("被打败了");
+        if (firstAttackPlayer.getVitality() <= 0) {
+            out.println(firstAttackPlayer.getName() + "被打败了");
         }
 
-        if (playerSecondAttack.getVitality() <= 0){
-            out.println("李四被打败了");
+        if (secondAttackPlayer.getVitality() <= 0){
+            out.println(secondAttackPlayer.getName() + "被打败了");
         }
+    }
 
+    private void printAttack(Player attackPlayer, Player attackedPalyer) {
+        out.println(attackPlayer.getName() + "攻击了" + attackedPalyer.getName() + ","
+                + attackedPalyer.getName() + "受到了" + attackedPalyer.getAttackedVitiality() + "点伤害,"
+                + attackedPalyer.getName() + "剩余生命：" + attackedPalyer.getVitality());
     }
 }
