@@ -15,11 +15,11 @@ public class Solider extends Player {
     }
 
     public void attack(Player play) {
-        play.reduceVitality(getvalueOfAttack());
+        play.reduceVitality(getValueOfAttack());
     }
 
     public void reduceVitality(int attackedVitality) {
-        this.attackedVitality = attackedVitality - armor.getValueOfDefence();
+        setAttack(attackedVitality);
         vitality -= this.attackedVitality;
     }
 
@@ -27,7 +27,16 @@ public class Solider extends Player {
         return "用" + weapon.getName();
     }
 
-    private int getvalueOfAttack() {
+    private int getValueOfAttack() {
         return random.nextInt(10) + weapon.getValueOfAttack();
+    }
+
+    private int calculateValueOfAttacked(int attackedVitality) {
+        return attackedVitality - armor.getValueOfDefence();
+    }
+
+    private void setAttack(int attackedVitality) {
+        this.attackedVitality = calculateValueOfAttacked(attackedVitality) > 0
+                ? calculateValueOfAttacked(attackedVitality) : 0;
     }
 }

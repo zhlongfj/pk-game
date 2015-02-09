@@ -91,4 +91,20 @@ public class GameProcessTest {
         InOrder inOrder = inOrder(out);
         inOrder.verify(out).println("普通人李四攻击了战士张三,张三受到了3点伤害,张三剩余生命：7");
     }
+
+    @Test
+    public void should_value_of_attacked_is_zero_when_value_of_attacked_is_less_than_value_of_defence() {
+        given(random1.nextInt(10))
+                .willReturn(4);
+        given(random2.nextInt(10))
+                .willReturn(2);
+
+        Player solider = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random1);
+        Player ordinaryPlayer = new OrdinaryPlayer("李四", 20, random2);
+        GameProcess game = new GameProcess(out, ordinaryPlayer, solider);
+        game.play();
+
+        InOrder inOrder = inOrder(out);
+        inOrder.verify(out).println("普通人李四攻击了战士张三,张三受到了0点伤害,张三剩余生命：10");
+    }
 }
