@@ -13,27 +13,27 @@ import static org.mockito.Mockito.*;
  */
 public class GameProcessTest {
 
-    private Random randomFirstAttack;
-    private Random randomSecondAttack;
+    private Random random1;
+    private Random random2;
     private PrintStream out;
 
     @Before
     public void setUp() throws Exception {
-        randomFirstAttack = mock(Random.class);
-        randomSecondAttack = mock(Random.class);
+        random1 = mock(Random.class);
+        random2 = mock(Random.class);
         out = mock(PrintStream.class);
 
     }
 
     @Test
     public void should_print_who_is_defeated_when_game_over() {
-        given(randomFirstAttack.nextInt(10))
+        given(random1.nextInt(10))
                 .willReturn(8, 8, 6);
-        given(randomSecondAttack.nextInt(10))
+        given(random2.nextInt(10))
                 .willReturn(2, 2, 3);
 
-        Player playerFirstAttack = new OrdinaryPlayer("张三", 10, randomFirstAttack);
-        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, randomSecondAttack);
+        Player playerFirstAttack = new OrdinaryPlayer("张三", 10, random1);
+        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, random2);
         GameProcess game = new GameProcess(out, playerFirstAttack, playerSecondAttack);
         game.play();
 
@@ -42,13 +42,13 @@ public class GameProcessTest {
 
     @Test
     public void should_print_pk_process() {
-        given(randomFirstAttack.nextInt(10))
+        given(random1.nextInt(10))
                 .willReturn(8, 8);
-        given(randomSecondAttack.nextInt(10))
+        given(random2.nextInt(10))
                 .willReturn(9, 9);
 
-        Player playerFIrstAttack = new OrdinaryPlayer("张三", 10, randomFirstAttack);
-        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, randomSecondAttack);
+        Player playerFIrstAttack = new OrdinaryPlayer("张三", 10, random1);
+        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, random2);
         GameProcess game = new GameProcess(out, playerFIrstAttack, playerSecondAttack);
         game.play();
 
@@ -62,17 +62,33 @@ public class GameProcessTest {
 
     @Test
     public void should_improve_value_of_attack_when_solider_use_weapon() {
-        given(randomFirstAttack.nextInt(10))
+        given(random1.nextInt(10))
                 .willReturn(4, 8);
-        given(randomSecondAttack.nextInt(10))
+        given(random2.nextInt(10))
                 .willReturn(9, 9);
 
-        Player playerFirstAttack = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), randomFirstAttack);
-        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, randomSecondAttack);
-        GameProcess game = new GameProcess(out, playerFirstAttack, playerSecondAttack);
+        Player solider = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random1);
+        Player ordinaryPlayer = new OrdinaryPlayer("李四", 20, random2);
+        GameProcess game = new GameProcess(out, solider, ordinaryPlayer);
         game.play();
 
         InOrder inOrder = inOrder(out);
         inOrder.verify(out).println("战士张三用优质木棒攻击了普通人李四,李四受到了8点伤害,李四剩余生命：12");
+    }
+
+    @Test
+    public void should_reduce_value_of_attacked_when_solider_is_attacked() {
+        given(random1.nextInt(10))
+                .willReturn(4);
+        given(random2.nextInt(10))
+                .willReturn(7);
+
+        Player solider = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random1);
+        Player ordinaryPlayer = new OrdinaryPlayer("李四", 20, random2);
+        GameProcess game = new GameProcess(out, ordinaryPlayer, solider);
+        game.play();
+
+        InOrder inOrder = inOrder(out);
+        inOrder.verify(out).println("普通人李四攻击了战士张三,张三受到了3点伤害,张三剩余生命：7");
     }
 }
