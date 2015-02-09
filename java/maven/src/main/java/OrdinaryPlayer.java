@@ -5,7 +5,8 @@ import java.util.Random;
  */
 public class OrdinaryPlayer extends Player{
     public OrdinaryPlayer(String name, int vitality, Random random) {
-        super("普通人" + name, vitality, random);
+        super(name, vitality, random);
+        profession = "普通人";
     }
 
     public void attack(Player play) {

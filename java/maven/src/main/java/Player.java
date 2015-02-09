@@ -5,6 +5,7 @@ import java.util.Random;
  */
 public abstract class Player {
     protected int vitality;
+    protected String profession;
     protected String name;
     protected Random random;
 
@@ -19,7 +20,9 @@ public abstract class Player {
     public String getName() {
         return name;
     }
-
+    public String getProfession() {
+        return profession;
+    }
     public int getVitality() {
         return vitality;
     }
