@@ -22,4 +22,8 @@ public class Solider extends Player {
         this.attackedVitality = attackedVitality;
         vitality -= this.attackedVitality;
     }
+
+    public String getUsedWeapon() {
+        return "用" + weapon.getName();
+    }
 }

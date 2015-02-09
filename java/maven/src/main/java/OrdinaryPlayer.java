@@ -17,4 +17,9 @@ public class OrdinaryPlayer extends Player{
         this.attackedVitality = attackedVitality;
         vitality -= this.attackedVitality;
     }
+
+    public String getUsedWeapon() {
+        return "";
+    }
+
 }

@@ -6,9 +6,7 @@ import java.io.PrintStream;
 import java.util.Random;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by zhl on 15/2/9.
@@ -62,4 +60,19 @@ public class GameProcessTest {
         inOrder.verify(out).println("张三被打败了");
     }
 
+    @Test
+    public void should_print_weapon_when_attack() {
+        given(randomFirstAttack.nextInt(10))
+                .willReturn(8, 8);
+        given(randomSecondAttack.nextInt(10))
+                .willReturn(9, 9);
+
+        Player playerFIrstAttack = new Solider("张三", 10, new Weapon(), new Armor(), randomFirstAttack);
+        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, randomSecondAttack);
+        GameProcess game = new GameProcess(out, playerFIrstAttack, playerSecondAttack);
+        game.play();
+
+        InOrder inOrder = inOrder(out);
+        inOrder.verify(out).println("战士张三用优质木棒攻击了普通人李四,李四受到了8点伤害,李四剩余生命：12");
+    }
 }

@@ -34,4 +34,6 @@ public abstract class Player {
     public abstract void attack(Player play);
 
     public abstract void reduceVitality(int attackedVitality);
+
+    public abstract String getUsedWeapon();
 }
