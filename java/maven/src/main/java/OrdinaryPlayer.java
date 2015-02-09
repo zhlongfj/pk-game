@@ -10,6 +10,9 @@ public class OrdinaryPlayer extends Player{
     }
 
     public void attack(Player play) {
+        if (this.getVitality() <= 0)
+            return;
+
         play.reduceVitality(random.nextInt(10));
     }
 

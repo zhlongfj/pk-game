@@ -19,6 +19,9 @@ public class Solider extends Player {
     }
 
     public void reduceVitality(int attackedVitality) {
+        if (this.getVitality() <= 0)
+            return;
+
         setAttack(attackedVitality);
         vitality -= this.attackedVitality;
     }

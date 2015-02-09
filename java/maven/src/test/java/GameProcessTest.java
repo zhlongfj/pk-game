@@ -57,7 +57,7 @@ public class GameProcessTest {
         inOrder.verify(out).println("普通人李四攻击了普通人张三,张三受到了9点伤害,张三剩余生命：1");
         inOrder.verify(out).println("普通人张三攻击了普通人李四,李四受到了8点伤害,李四剩余生命：4");
         inOrder.verify(out).println("普通人李四攻击了普通人张三,张三受到了9点伤害,张三剩余生命：-8");
-        inOrder.verify(out).println("张三被打败了");
+        inOrder.verify(out).println("普通人张三被打败了");
     }
 
     @Test
@@ -133,12 +133,35 @@ public class GameProcessTest {
                 .willReturn(5);
 
         Player player1 = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random1);
-        Player player2 = new Solider("李四", 20, new Weapon("优质木棒", 3), new Armor("铠甲", 3), random1);
+        Player player2 = new Solider("李四", 20, new Weapon("优质木棒", 3), new Armor("铠甲", 3), random2);
 
         GameProcess game = new GameProcess(out, player1, player2);
         game.start();
 
         InOrder inOrder = inOrder(out);
         inOrder.verify(out).println("战士张三用优质木棒攻击了战士李四,李四受到了9点伤害,李四剩余生命：11");
+    }
+
+    @Test
+    public void should_print_right_pk_process_when_solider_attack_ordinary_player() {
+        given(random1.nextInt(10))
+                .willReturn(0, 5, 6);
+        given(random2.nextInt(10))
+                .willReturn(8, 7, 9);
+
+        Player player1 = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random1);
+        Player player2 = new OrdinaryPlayer("李四", 20, random2);
+
+        GameProcess game = new GameProcess(out, player1, player2);
+        game.start();
+
+        InOrder inOrder = inOrder(out);
+        inOrder.verify(out).println("战士张三用优质木棒攻击了普通人李四,李四受到了4点伤害,李四剩余生命：16");
+        inOrder.verify(out).println("普通人李四攻击了战士张三,张三受到了4点伤害,张三剩余生命：6");
+        inOrder.verify(out).println("战士张三用优质木棒攻击了普通人李四,李四受到了9点伤害,李四剩余生命：7");
+        inOrder.verify(out).println("普通人李四攻击了战士张三,张三受到了3点伤害,张三剩余生命：3");
+        inOrder.verify(out).println("战士张三用优质木棒攻击了普通人李四,李四受到了10点伤害,李四剩余生命：-3");
+        inOrder.verify(out, never()).println("普通人李四攻击了战士张三,张三受到了5点伤害,张三剩余生命：-2");
+        inOrder.verify(out).println("普通人李四被打败了");
     }
 }

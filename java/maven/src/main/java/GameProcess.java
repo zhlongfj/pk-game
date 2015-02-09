@@ -23,11 +23,11 @@ public class GameProcess {
         }
 
         if (firstAttackPlayer.getVitality() <= 0) {
-            out.println(firstAttackPlayer.getName() + "被打败了");
+            out.println(firstAttackPlayer.getProfession() + firstAttackPlayer.getName() + "被打败了");
         }
 
         if (secondAttackPlayer.getVitality() <= 0){
-            out.println(secondAttackPlayer.getName() + "被打败了");
+            out.println(secondAttackPlayer.getProfession() + secondAttackPlayer.getName() + "被打败了");
         }
     }
 
