@@ -34,8 +34,8 @@ public class GameProcessTest {
         given(randomSecondAttack.nextInt(10))
                 .willReturn(2, 2, 3);
 
-        Player playerFirstAttack = new Player("张三", 10, randomFirstAttack);
-        Player playerSecondAttack = new Player("李四", 20, randomSecondAttack);
+        Player playerFirstAttack = new OrdinaryPlayer("张三", 10, randomFirstAttack);
+        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, randomSecondAttack);
         GameProcess game = new GameProcess(out, playerFirstAttack, playerSecondAttack);
         game.play();
 
@@ -49,8 +49,8 @@ public class GameProcessTest {
         given(randomSecondAttack.nextInt(10))
                 .willReturn(9, 9);
 
-        Player playerFIrstAttack = new Player("张三", 10, randomFirstAttack);
-        Player playerSecondAttack = new Player("李四", 20, randomSecondAttack);
+        Player playerFIrstAttack = new OrdinaryPlayer("张三", 10, randomFirstAttack);
+        Player playerSecondAttack = new OrdinaryPlayer("李四", 20, randomSecondAttack);
         GameProcess game = new GameProcess(out, playerFIrstAttack, playerSecondAttack);
         game.play();
 

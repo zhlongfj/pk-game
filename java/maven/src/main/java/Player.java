@@ -3,15 +3,15 @@ import java.util.Random;
 /**
  * Created by zhl on 15/2/9.
  */
-public class Player {
-    private int vitality;
-    private String name;
-    private Random random;
+public abstract class Player {
+    protected int vitality;
+    protected String name;
+    protected Random random;
 
-    private int attackedVitality;
+    protected int attackedVitality;
 
     public Player(String name, int vitality, Random random) {
-        this.name = "普通人" + name;
+        this.name = name;
         this.vitality = vitality;
         this.random = random;
     }
@@ -28,12 +28,7 @@ public class Player {
         return attackedVitality;
     }
 
-    public void attack(Player play) {
-        play.reduceVitality(random.nextInt(10));
-    }
+    public abstract void attack(Player play);
 
-    public void reduceVitality(int attackedVitality) {
-        this.attackedVitality = attackedVitality;
-        vitality -= this.attackedVitality;
-    }
+    public abstract void reduceVitality(int attackedVitality);
 }
