@@ -5,26 +5,26 @@ import java.io.PrintStream;
  */
 public class GameProcess {
     private PrintStream out;
-    private Player zhangsan;
-    private Player lisi;
+    private Player playerFirstAttack;
+    private Player playerSecondAttack;
 
-    public GameProcess(PrintStream out, Player zhangsan, Player lisi) {
+    public GameProcess(PrintStream out, Player playerFirstAttack, Player playerSecondAttack) {
         this.out = out;
-        this.zhangsan = zhangsan;
-        this.lisi = lisi;
+        this.playerFirstAttack = playerFirstAttack;
+        this.playerSecondAttack = playerSecondAttack;
     }
 
     public void play() {
-        while (zhangsan.getVitality() > 0 && lisi.getVitality() > 0) {
-            lisi.attack(zhangsan);
-            zhangsan.attack(lisi);
+        while (playerFirstAttack.getVitality() > 0 && playerSecondAttack.getVitality() > 0) {
+            playerFirstAttack.attack(playerSecondAttack);
+            playerSecondAttack.attack(playerFirstAttack);
         }
 
-        if (zhangsan.getVitality() <= 0) {
-            out.println("张三被打败了");
+        if (playerFirstAttack.getVitality() <= 0) {
+            out.println("被打败了");
         }
 
-        if (lisi.getVitality() <= 0){
+        if (playerSecondAttack.getVitality() <= 0){
             out.println("李四被打败了");
         }
 

@@ -13,6 +13,10 @@ public class Player {
         this.random = random;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void attack(Player play) {
         play.reduceVitality(random.nextInt(10));
     }
