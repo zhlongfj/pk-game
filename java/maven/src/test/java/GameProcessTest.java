@@ -61,5 +61,4 @@ public class GameProcessTest {
         inOrder.verify(out).println("李四攻击了张三,张三受到了9点伤害,张三剩余生命：-8");
         inOrder.verify(out).println("张三被打败了");
     }
-
 }

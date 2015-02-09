@@ -33,7 +33,7 @@ public class GameProcess {
 
     private void printAttack(Player attackPlayer, Player attackedPalyer) {
         out.println(attackPlayer.getName() + "攻击了" + attackedPalyer.getName() + ","
-                + attackedPalyer.getName() + "受到了" + attackedPalyer.getAttackedVitiality() + "点伤害,"
+                + attackedPalyer.getName() + "受到了" + attackedPalyer.getAttackedVitality() + "点伤害,"
                 + attackedPalyer.getName() + "剩余生命：" + attackedPalyer.getVitality());
     }
 }

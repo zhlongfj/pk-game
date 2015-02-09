@@ -8,14 +8,10 @@ public class Player {
     private String name;
     private Random random;
 
-    public int getAttackedVitiality() {
-        return attackedVitiality;
-    }
-
-    private int attackedVitiality;
+    private int attackedVitality;
 
     public Player(String name, int vitality, Random random) {
-        this.name = name;
+        this.name = "普通人" + name;
         this.vitality = vitality;
         this.random = random;
     }
@@ -24,16 +20,20 @@ public class Player {
         return name;
     }
 
+    public int getVitality() {
+        return vitality;
+    }
+
+    public int getAttackedVitality() {
+        return attackedVitality;
+    }
+
     public void attack(Player play) {
         play.reduceVitality(random.nextInt(10));
     }
 
-    public void reduceVitality(int attackedVitiality) {
-        this.attackedVitiality = attackedVitiality;
-        vitality -= this.attackedVitiality;
-    }
-
-    public int getVitality() {
-        return vitality;
+    public void reduceVitality(int attackedVitality) {
+        this.attackedVitality = attackedVitality;
+        vitality -= this.attackedVitality;
     }
 }
