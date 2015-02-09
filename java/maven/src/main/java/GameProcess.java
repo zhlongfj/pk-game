@@ -14,7 +14,7 @@ public class GameProcess {
         this.secondAttackPlayer = secondAttackPlayer;
     }
 
-    public void play() {
+    public void start() {
         while (firstAttackPlayer.getVitality() > 0 && secondAttackPlayer.getVitality() > 0) {
             firstAttackPlayer.attack(secondAttackPlayer);
             printAttack(firstAttackPlayer, secondAttackPlayer);
