@@ -61,15 +61,15 @@ public class GameProcessTest {
     }
 
     @Test
-    public void should_print_weapon_when_attack() {
+    public void should_improve_value_of_attack_when_solider_use_weapon() {
         given(randomFirstAttack.nextInt(10))
-                .willReturn(8, 8);
+                .willReturn(4, 8);
         given(randomSecondAttack.nextInt(10))
                 .willReturn(9, 9);
 
-        Player playerFIrstAttack = new Solider("张三", 10, new Weapon(), new Armor(), randomFirstAttack);
+        Player playerFirstAttack = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), randomFirstAttack);
         Player playerSecondAttack = new OrdinaryPlayer("李四", 20, randomSecondAttack);
-        GameProcess game = new GameProcess(out, playerFIrstAttack, playerSecondAttack);
+        GameProcess game = new GameProcess(out, playerFirstAttack, playerSecondAttack);
         game.play();
 
         InOrder inOrder = inOrder(out);

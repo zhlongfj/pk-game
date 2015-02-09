@@ -16,8 +16,8 @@ public class SoliderTest {
         Random random = mock(Random.class);
         given(random.nextInt(10)).willReturn(3);
 
-        Player zhangsan = new Solider("张三", 10, new Weapon(), new Armor(), random);
-        Player lisi = new Solider("李四", 20, new Weapon(), new Armor(), random);
+        Player zhangsan = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random);
+        Player lisi = new Solider("李四", 20, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random);
         zhangsan.attack(lisi);
 
         assertThat(lisi.getVitality()).isLessThan(20);
@@ -27,7 +27,7 @@ public class SoliderTest {
     @Test
     public void should_print_profession() {
         Random random = mock(Random.class);
-        Player zhangsan = new Solider("张三", 10, new Weapon(), new Armor(), random);
+        Player zhangsan = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random);
         assertThat(zhangsan.getName()).isEqualTo("战士张三");
     }
 }

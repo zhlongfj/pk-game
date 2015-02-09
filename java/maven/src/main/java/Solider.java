@@ -15,7 +15,7 @@ public class Solider extends Player {
     }
 
     public void attack(Player play) {
-        play.reduceVitality(random.nextInt(10));
+        play.reduceVitality(getvalueOfAttack());
     }
 
     public void reduceVitality(int attackedVitality) {
@@ -25,5 +25,9 @@ public class Solider extends Player {
 
     public String getUsedWeapon() {
         return "用" + weapon.getName();
+    }
+
+    private int getvalueOfAttack() {
+        return random.nextInt(10) + weapon.getValueOfAttack();
     }
 }

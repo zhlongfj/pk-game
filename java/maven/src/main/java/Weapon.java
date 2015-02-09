@@ -4,12 +4,18 @@
 public class Weapon {
 
     private String name;
+    private int valueOfAttack;
 
-    public Weapon() {
-        name = "优质木棒";
+    public Weapon(String name, int valueOfAttack) {
+        this.name = name;
+        this.valueOfAttack = valueOfAttack;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getValueOfAttack() {
+        return valueOfAttack;
     }
 }
