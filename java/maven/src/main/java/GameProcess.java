@@ -1,4 +1,5 @@
 import java.io.PrintStream;
+import java.util.Random;
 
 /**
  * Created by zhl on 15/2/9.
@@ -7,6 +8,13 @@ public class GameProcess {
     private PrintStream out;
     private Player firstAttackPlayer;
     private Player secondAttackPlayer;
+
+    public static void main(String[] args) {
+        Player player1 = new OrdinaryPlayer("张三", 10, new Random());
+        Player player2 = new Solider("李四", 20, new Weapon("优质木棒", 4), new Armor("铠甲", 4), new Random());
+        GameProcess game = new GameProcess(System.out, player1, player2);
+        game.start();
+    }
 
     public GameProcess(PrintStream out, Player firstAttackPlayer, Player secondAttackPlayer) {
         this.out = out;
