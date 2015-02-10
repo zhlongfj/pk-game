@@ -15,13 +15,17 @@ public class GameProcess {
     }
 
     public void start() {
-        while (firstAttackPlayer.getVitality() > 0 && secondAttackPlayer.getVitality() > 0) {
-            firstAttackPlayer.attack(secondAttackPlayer);
-            printAttack(firstAttackPlayer, secondAttackPlayer);
-            secondAttackPlayer.attack(firstAttackPlayer);
-            printAttack(secondAttackPlayer, firstAttackPlayer);
-        }
+        fight();
+        fightResult();
+    }
 
+    private void fight() {
+        while (firstAttackPlayer.getVitality() > 0 && secondAttackPlayer.getVitality() > 0) {
+            fightOnce();
+        }
+    }
+
+    private void fightResult() {
         if (firstAttackPlayer.getVitality() <= 0) {
             out.println(firstAttackPlayer.getProfession() + firstAttackPlayer.getName() + "被打败了");
         }
@@ -29,6 +33,13 @@ public class GameProcess {
         if (secondAttackPlayer.getVitality() <= 0){
             out.println(secondAttackPlayer.getProfession() + secondAttackPlayer.getName() + "被打败了");
         }
+    }
+
+    private void fightOnce() {
+        firstAttackPlayer.attack(secondAttackPlayer);
+        printAttack(firstAttackPlayer, secondAttackPlayer);
+        secondAttackPlayer.attack(firstAttackPlayer);
+        printAttack(secondAttackPlayer, firstAttackPlayer);
     }
 
     private void printAttack(Player attackPlayer, Player attackedPalyer) {

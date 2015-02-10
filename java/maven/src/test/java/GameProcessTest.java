@@ -37,7 +37,7 @@ public class GameProcessTest {
         GameProcess game = new GameProcess(out, playerFirstAttack, playerSecondAttack);
         game.start();
 
-        verify(out).println("李四被打败了");
+        verify(out).println("普通人李四被打败了");
     }
 
     @Test
