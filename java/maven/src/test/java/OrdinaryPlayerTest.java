@@ -27,6 +27,8 @@ public class OrdinaryPlayerTest {
     public void should_print_profession() {
         Random random = mock(Random.class);
         Player zhangsan = new OrdinaryPlayer("张三", 10, random);
-        assertThat(zhangsan.getName()).isEqualTo("普通人张三");
+
+        assertThat(zhangsan.getName()).isEqualTo("张三");
+        assertThat(zhangsan.getProfession()).isEqualTo("普通人");
     }
 }

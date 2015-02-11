@@ -28,6 +28,8 @@ public class SoliderTest {
     public void should_print_profession() {
         Random random = mock(Random.class);
         Player zhangsan = new Solider("张三", 10, new Weapon("优质木棒", 4), new Armor("铠甲", 4), random);
-        assertThat(zhangsan.getName()).isEqualTo("战士张三");
+
+        assertThat(zhangsan.getName()).isEqualTo("张三");
+        assertThat(zhangsan.getProfession()).isEqualTo("战士");
     }
 }
