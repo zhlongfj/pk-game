@@ -50,10 +50,10 @@ public class GameProcess {
         printAttack(secondAttackPlayer, firstAttackPlayer);
     }
 
-    private void printAttack(Player attackPlayer, Player attackedPalyer) {
+    private void printAttack(Player attackPlayer, Player attackPlayer) {
         out.println(attackPlayer.getProfession() + attackPlayer.getName() + attackPlayer.getUsedWeapon()
-                + "攻击了" + attackedPalyer.getProfession() + attackedPalyer.getName() + ","
-                + attackedPalyer.getName() + "受到了" + attackedPalyer.getAttackedVitality() + "点伤害,"
-                + attackedPalyer.getName() + "剩余生命：" + attackedPalyer.getVitality());
+                + "攻击了" + attackPlayer.getProfession() + attackPlayer.getName() + ","
+                + attackPlayer.getName() + "受到了" + attackPlayer.getAttackedVitality() + "点伤害,"
+                + attackPlayer.getName() + "剩余生命：" + attackPlayer.getVitality());
     }
 }
